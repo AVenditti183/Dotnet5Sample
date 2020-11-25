@@ -1,0 +1,20 @@
+@inject ITagService tagService
+
+<EditForm Model="post" @OnValidSubmit="Save" >
+<label>Title</label>
+<InputText @bind-Value="post.Title"></InputText>
+<label>Body</label>
+<InputTextArea @bind-Value="post.Body"></InputTextArea>
+ 
+
+</EditForm>
+
+@code
+{
+    [Parameter]
+    public PostDto post {get;set;}
+
+    [Parameter]
+    public EventCallback<PostDto> Save {get;set;}
+
+}

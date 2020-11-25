@@ -1,0 +1,35 @@
+﻿@page "/all"
+@inject IPostService postService
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td scope="col"><h3>Id</h3></td>
+            <td scope="col">Title</td>
+            <td scope="col">Body</td>
+        </tr>
+    </thead>
+    <tbody>
+        <Virtualize Context="post" Items="Posts" OverscanCount="10">
+            <ItemContent>
+                @* <tr>
+                        <th scope="row">@post.Id</th>
+                        <td>@post.Title</td>
+                        <td>@post.Body</td>
+                    </tr> *@
+                <Post element="@post"></Post>
+            </ItemContent>
+            <Placeholder>
+                <tr scope="row">
+                    <td colspan="3"><h3> Loading</h3></td>
+                </tr>
+            </Placeholder>
+        </Virtualize>
+    </tbody>
+</table>
+@code{ public PostDto[] Posts { get; set; }
+            protected override async Task OnInitializedAsync()
+            {
+                Posts = Array.Empty<PostDto>();
+                Posts = await postService.GetAll();
+                await base.OnInitializedAsync();
+            } }

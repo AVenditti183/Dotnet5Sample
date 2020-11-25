@@ -1,0 +1,62 @@
+﻿<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">dotnet5sample</a>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </li>
+    </ul>
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/images" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Images
+            </NavLink>
+        </li>
+    </ul>
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/inputradio" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Input Radio
+            </NavLink>
+        </li>
+    </ul>
+     <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/postbase" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Base Post
+            </NavLink>
+        </li>
+    </ul>
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/all" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> All Post
+            </NavLink>
+        </li>
+    </ul>
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/batch" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Batch Load Post
+            </NavLink>
+        </li>
+    </ul>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

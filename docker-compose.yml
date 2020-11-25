@@ -1,0 +1,17 @@
+services:
+  frontend:
+    build:
+      context: ./
+      dockerfile: dockerfile
+    ports:
+        - 8080:80
+    depends_on:
+      - sqlserver
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "#Password_1#"
+      MSSQL_PID: "Express"
+    volumes:
+        - /dataDb

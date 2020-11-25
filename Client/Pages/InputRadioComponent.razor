@@ -1,0 +1,44 @@
+@using dotnet5sample.Client.Models
+@page "/inputradio"
+<EditForm Model="starship">
+    <p>
+        <InputRadioGroup @bind-Value="starship.Manufacturer">
+            Manufacturer:
+            <br>
+            @foreach (var manufacturer in (Manufacturer[])Enum
+                    .GetValues(typeof(Manufacturer)))
+                    {
+                        <InputRadio Value="manufacturer" />
+                        @manufacturer
+                        <br>
+                    }
+                </InputRadioGroup>
+            </p>
+
+            <p>
+                Pick one color and one engine:
+                <InputRadioGroup Name="engine" @bind-Value="starship.Engine">
+                    <InputRadioGroup Name="color" @bind-Value="starship.Color">
+                        <InputRadio Name="color" Value="Color.ImperialRed" />Imperial Red<br>
+                        <InputRadio Name="engine" Value="Engine.Ion" />Ion<br>
+                        <InputRadio Name="color" Value="Color.SpacecruiserGreen" />
+                        Spacecruiser Green<br>
+                        <InputRadio Name="engine" Value="Engine.Plasma" />Plasma<br>
+                        <InputRadio Name="color" Value="Color.StarshipBlue" />Starship Blue<br>
+                        <InputRadio Name="engine" Value="Engine.Fusion" />Fusion<br>
+                        <InputRadio Name="color" Value="Color.VoyagerOrange" />
+                        Voyager Orange<br>
+                        <InputRadio Name="engine" Value="Engine.Warp" />Warp<br>
+                    </InputRadioGroup>
+                </InputRadioGroup>
+            </p>
+        </EditForm>
+        @code{
+    private Starship starship;
+
+    protected override async Task OnInitializedAsync()
+    {
+        starship = new Starship();
+        await base.OnInitializedAsync();
+    }
+}

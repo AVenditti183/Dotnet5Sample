@@ -1,0 +1,43 @@
+﻿@page "/batch"
+@inject IPostService postService
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td scope="col"><h3>Id</h3></td>
+            <td scope="col">Title</td>
+            <td scope="col">Body</td>
+        </tr>
+    </thead>
+    <tbody>
+        <Virtualize Context="post" ItemsProvider="@LoadPosts" OverscanCount="10">
+            <ItemContent>
+                @* <tr>
+                        <th scope="row">@post.Id</th>
+                        <td>@post.Title</td>
+                        <td>@post.Body</td>
+                    </tr> *@
+                <Post element="@post"></Post>
+            </ItemContent>
+            <Placeholder>
+                <tr scope="row">
+                    <td colspan="3"><h3> Loading</h3></td>
+                </tr>
+            </Placeholder>
+        </Virtualize>
+    </tbody>
+</table>
+@code{ private int totalPosts;
+            protected override async Task OnInitializedAsync()
+            {
+                totalPosts = 1000;
+                totalPosts = await postService.Count();
+                await base.OnInitializedAsync();
+            }
+
+            private async ValueTask<ItemsProviderResult<PostDto>> LoadPosts(ItemsProviderRequest request)
+            {
+                var numPosts = Math.Min(request.Count, totalPosts - request.StartIndex);
+                var posts = await postService.Get(request.StartIndex, numPosts);
+
+                return new ItemsProviderResult<PostDto>(posts, totalPosts);
+            } }

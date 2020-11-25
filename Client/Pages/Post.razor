@@ -1,0 +1,10 @@
+<tr>
+        <th scope="row"><h3>@element.Id</h3></th>
+        <td>@element.Title</td>
+        <td>@element.Body</td>
+</tr>
+
+@code{
+    [Parameter]
+    public PostDto element {get;set;}
+}

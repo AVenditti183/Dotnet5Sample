@@ -1,0 +1,30 @@
+@page "/postbase"
+@inject IPostService postService
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td scope="col"><h3>Id</h3></td>
+            <td scope="col">Title</td>
+            <td scope="col">Body</td>
+        </tr>
+    </thead>
+    <tbody>
+        
+    
+@foreach (var post in Posts)
+{
+    <tr>
+                        <th scope="row">@post.Id</th>
+                        <td>@post.Title</td>
+                        <td>@post.Body</td>
+                    </tr> 
+}
+</tbody>
+</table>
+@code{ public PostDto[] Posts { get; set; }
+            protected override async Task OnInitializedAsync()
+            {
+                Posts = Array.Empty<PostDto>();
+                Posts = await postService.GetAll();
+                await base.OnInitializedAsync();
+            } }
